@@ -9,8 +9,10 @@
 <h2>Add Facebook Login to your webpage</h2>
 
 <p id="profile"></p>
-<div class="fb-login-button" data-width="" data-size="large" data-button-type="continue_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false"></div>
-<script>
+<div class="fb-login-button" data-width="" data-size="large" data-button-type="continue_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false" th:attr="data-app-id=${facebookAppId}"></div>
+
+
+<script th:inline="javascript">
 
     (function(d, s, id){
         var js, fjs = d.getElementsByTagName(s)[0];
@@ -21,8 +23,9 @@
     }(document, 'script', 'facebook-jssdk'));
 
     window.fbAsyncInit = function() {
+        console.log('User cancelled login or did not fully authorize.');
         FB.init({
-            appId            : '123456789', // 여기에 본인의 앱 ID를 입력
+            appId            : /*[[${facebookAppId}]]*/, // 여기에 본인의 앱 ID를 입력
             xfbml            : true,
             version          : 'v18.0' // 여기에 본인의 Graph API 버전을 입력
         });

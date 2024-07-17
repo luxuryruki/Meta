@@ -1,0 +1,6 @@
+server:
+  port: 8001
+
+facebook:
+  app:
+    id: 123452345
