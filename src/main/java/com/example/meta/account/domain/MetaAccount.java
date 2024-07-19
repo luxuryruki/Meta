@@ -15,6 +15,8 @@ public class MetaAccount {
     Long id;
     String name;
     String token;
+    String pageId;
+    String instagramId;
 
     public void setName(String name) {
         this.name = name;
@@ -22,5 +24,13 @@ public class MetaAccount {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public void setPageId(String pageId) {
+        this.pageId = pageId;
+    }
+
+    public void setInstagramId(String instagramId) {
+        this.instagramId = instagramId;
     }
 }
