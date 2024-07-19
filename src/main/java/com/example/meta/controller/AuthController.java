@@ -35,6 +35,9 @@ public class AuthController {
         // 여기서 사용자 정보를 처리합니다.
         String accessToken = (String) payload.get("accessToken");
         String token = metaAccountUtils.getLongTermToken(accessToken);
+        Map<String, Object> page = metaAccountUtils.getPage(token);
+//        Map<String, Object> profile =
+//        Map<String, Object> igProfile =
         System.out.println("Received user data: " + token);
 
     }
