@@ -38,17 +38,29 @@ public class MetaAccountUtils {
         }
     }
 
+    //Get Facebook page info
     public Map<String, Object> getPage(String token) {
         try {
             String apiUrl = configuration.getGraphUrlPrefix() + "/me/accounts";
 
             Map<String, Object> response = metaFeignClient.callGetWithParam("me/accounts", token);
             List<Map<String,Object>> dataList = (List<Map<String,Object>>)response.get("data");
-//            String response = ApiUtils.callApiMethod(apiUrl, null, data, 5000, 10000, HttpMethod.GET, null);
-//            Map<String, Object> resultMap = objectMapper.readValue(response, Map.class);
-//            List<Map<String,Object>> dataList = (List<Map<String,Object>>) resultMap.get("data");
             return dataList.get(0);
 //            return result;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    //Get Instagram profile
+    public Map<String, Object> getProfile(String pageId, String token) {
+        try {
+            String apiUrl = configuration.getGraphUrlPrefix() + "/" + pageId;
+            Map<String, Object> data = new HashMap<>();
+            data.put("fields", "name,instagram_business_account");
+            data.put("access_token", token);
+            Map<String, Object> result = metaFeignClient.callGet(pageId, null, data);
+            return result;
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
