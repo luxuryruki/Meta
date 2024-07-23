@@ -56,10 +56,9 @@ public class MetaAccountUtils {
     public Map<String, Object> getProfile(String pageId, String token) {
         try {
             String apiUrl = configuration.getGraphUrlPrefix() + "/" + pageId;
-            Map<String, Object> data = new HashMap<>();
-            data.put("fields", "name,instagram_business_account");
-            data.put("access_token", token);
-            Map<String, Object> result = metaFeignClient.callGet(pageId, null, data);
+//            Map<String, Object> data = new HashMap<>();
+//            data.put("fields", "name,instagram_business_account");
+            Map<String, Object> result = metaFeignClient.callGet(pageId, token, "name,instagram_business_account");
             return result;
         } catch (Exception e) {
             throw new RuntimeException(e);

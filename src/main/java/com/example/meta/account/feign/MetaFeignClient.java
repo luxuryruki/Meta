@@ -21,5 +21,5 @@ public interface MetaFeignClient {
     Map<String, Object> callGetWithParam(@PathVariable("uri") String uri, @RequestParam("access_token") String accessToken);
 
     @GetMapping("/{uri}")
-    Map<String, Object> callGet(@PathVariable("uri") String uri, @RequestParam("access_token") String accessToken, @RequestBody Map<String, Object> data);
+    Map<String, Object> callGet(@PathVariable("uri") String uri, @RequestParam("access_token") String accessToken, @RequestParam("fields") String data);
 }
