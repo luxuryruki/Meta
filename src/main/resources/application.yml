@@ -42,5 +42,6 @@ spring:
       # 선택 가능한 값: default(기본값 - 공개 리포지토리), annotated(어노테이션이 지정된 리포지토리만), all(모든 리포지토리), visibility(공개 리포지토리만)
 
 
-
-
+meta:
+  facebook:
+    graph-url-prefix: https://graph.facebook.com/v18.0
