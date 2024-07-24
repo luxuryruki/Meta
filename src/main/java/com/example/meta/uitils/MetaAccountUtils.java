@@ -1,7 +1,7 @@
-package com.example.meta.account.service;
+package com.example.meta.uitils;
 
-import com.example.meta.account.config.MetaConfiguration;
-import com.example.meta.account.feign.MetaFeignClient;
+import com.example.meta.configuration.MetaConfiguration;
+import com.example.meta.feign.MetaFeignClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -20,7 +20,6 @@ public class MetaAccountUtils {
 
     public String getLongTermToken(String token) {
         try {
-            String apiUrl = configuration.getGraphUrlPrefix() + "/oauth/access_token";
 
             Map<String, Object> data = new HashMap<>();
             data.put("grant_type", "fb_exchange_token");
@@ -41,7 +40,6 @@ public class MetaAccountUtils {
     //Get Facebook page info
     public Map<String, Object> getPage(String token) {
         try {
-            String apiUrl = configuration.getGraphUrlPrefix() + "/me/accounts";
 
             Map<String, Object> response = metaFeignClient.callGetWithParam("me/accounts", token);
             List<Map<String,Object>> dataList = (List<Map<String,Object>>)response.get("data");
@@ -55,9 +53,7 @@ public class MetaAccountUtils {
     //Get Instagram profile
     public Map<String, Object> getProfile(String pageId, String token) {
         try {
-            String apiUrl = configuration.getGraphUrlPrefix() + "/" + pageId;
-//            Map<String, Object> data = new HashMap<>();
-//            data.put("fields", "name,instagram_business_account");
+
             Map<String, Object> result = metaFeignClient.callGet(pageId, token, "name,instagram_business_account");
             return result;
         } catch (Exception e) {

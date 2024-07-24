@@ -1,4 +1,4 @@
-package com.example.meta.account.config;
+package com.example.meta.configuration;
 
 import io.github.cdimascio.dotenv.Dotenv;
 import lombok.Getter;

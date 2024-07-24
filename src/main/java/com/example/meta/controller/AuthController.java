@@ -1,20 +1,17 @@
 package com.example.meta.controller;
 
 
-import com.example.meta.account.config.MetaConfiguration;
+import com.example.meta.configuration.MetaConfiguration;
 import com.example.meta.account.domain.MetaAccount;
-import com.example.meta.account.feign.MetaFeignClient;
 import com.example.meta.account.service.MetaAccountService;
-import com.example.meta.account.service.MetaAccountUtils;
+import com.example.meta.uitils.MetaAccountUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import java.util.HashMap;
 import java.util.Map;
 
 @Controller
@@ -52,10 +49,9 @@ public class AuthController {
         metaAccount.setPageId((String)page.get("id"));
 
         metaAccountService.save(metaAccount);
-//        Long id = metaAccount.getId();
-//        MetaAccount readAccount  = metaAccountService.read(id).orElse(null);
-//        System.out.println(readAccount);
+    }
 
+    public void getContent(){
 
     }
     

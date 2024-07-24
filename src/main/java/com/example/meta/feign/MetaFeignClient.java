@@ -1,4 +1,4 @@
-package com.example.meta.account.feign;
+package com.example.meta.feign;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
