@@ -4,10 +4,7 @@ import feign.QueryMap;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.cloud.openfeign.SpringQueryMap;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -24,4 +21,7 @@ public interface MetaFeignClient {
 
     @GetMapping("/{uri}")
     Map<String, Object> callGet(@PathVariable("uri") String uri,  @SpringQueryMap Map<String, Object> data);
+
+    @PostMapping("/{uri}")
+    Map<String, Object> callPost(@PathVariable("uri") String uri,  @SpringQueryMap Map<String, Object> data);
 }

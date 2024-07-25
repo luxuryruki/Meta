@@ -54,8 +54,6 @@ public class AuthController {
         System.out.println("savedAccount : "+ savedAccount.getId());
     }
 
-    public void getContent(){
 
-    }
     
 }
