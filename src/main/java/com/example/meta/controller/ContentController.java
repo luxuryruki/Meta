@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @Controller
@@ -27,14 +28,16 @@ public class ContentController {
     private MetaAccountService metaAccountService;
 
     @GetMapping("/getMedia")
-    public Map<String, Object> login(HttpServletRequest request) {
+    public void getMedia(HttpServletRequest request) {
         Long id = Long.valueOf(request.getParameter("id")) ;
         MetaAccount metaAccount =  metaAccountService.read(id).orElse(null);
         String token = metaAccount.getToken();
         String igId = metaAccount.getInstagramId();
 
-        Map<String, Object>  contents = metaContentUtils.getMedia(igId,token);
+        Map<String,Object> data = new HashMap<>();
+        data.put("access_token", token);
+        data.put("limit", 20);
 
-        return contents;
+        Map<String, Object>  contents = metaContentUtils.getMedia(igId,data);
     }
 }

@@ -6,6 +6,7 @@ import com.example.meta.account.domain.MetaAccount;
 import com.example.meta.account.service.MetaAccountService;
 import com.example.meta.uitils.MetaAccountUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Meta;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -48,7 +49,9 @@ public class AuthController {
         metaAccount.setToken(token);
         metaAccount.setPageId((String)page.get("id"));
 
-        metaAccountService.save(metaAccount);
+        MetaAccount savedAccount = metaAccountService.save(metaAccount);
+        System.out.println("metaAccount : "+ metaAccount.getId());
+        System.out.println("savedAccount : "+ savedAccount.getId());
     }
 
     public void getContent(){

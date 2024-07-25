@@ -53,8 +53,11 @@ public class MetaAccountUtils {
     //Get Instagram profile
     public Map<String, Object> getProfile(String pageId, String token) {
         try {
-
-            Map<String, Object> result = metaFeignClient.callGet(pageId, token, "name,instagram_business_account");
+            Map<String,Object> data = new HashMap<>();
+            String fields = "name,instagram_business_account";
+            data.put("fields", fields);
+            data.put("access_token", token);
+            Map<String, Object> result = metaFeignClient.callGet(pageId, data);
             return result;
         } catch (Exception e) {
             throw new RuntimeException(e);
