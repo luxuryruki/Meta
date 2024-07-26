@@ -113,19 +113,6 @@ public class MetaContentUtils {
         }
     }
 
-    private String checkContainerStatus(String containerId, Map<String, Object> data){
-        String apiUrl = configuration.getGraphUrlPrefix() + "/"+ containerId;
-
-        Map<String, Object> containerData = new HashMap<>();
-        containerData.put("fields","status_code");
-
-        containerData.put("access_token", data.get("access_token"));
-
-        String uri = containerId;
-        Map<String, Object> result = metaFeignClient.callGet(uri ,containerData);
-        return (String) result.get("status_code");
-    }
-
     public boolean isAvailableToUpload(String containerId, Map<String, Object> data){
         int retry = 0;
         int max_retry = 10;
@@ -151,5 +138,18 @@ public class MetaContentUtils {
             }
         }
         return false;
+    }
+
+    private String checkContainerStatus(String containerId, Map<String, Object> data){
+        String apiUrl = configuration.getGraphUrlPrefix() + "/"+ containerId;
+
+        Map<String, Object> containerData = new HashMap<>();
+        containerData.put("fields","status_code");
+
+        containerData.put("access_token", data.get("access_token"));
+
+        String uri = containerId;
+        Map<String, Object> result = metaFeignClient.callGet(uri ,containerData);
+        return (String) result.get("status_code");
     }
 }
