@@ -81,13 +81,23 @@ public class ContentController {
 
             // create container
             Map<String,Object> container = metaContentUtils.postSingleContent(igId,data);
+            String containerId = (String) container.get("id");
 
+            //Todo check container status logic
+            /*
+            * if container is not ready, you may get an error
 
-            //Todo content upload
-            Map<String,Object> result = metaContentUtils.uploadContainer(igId,data);
+            * */
+            if(metaContentUtils.isAvailableToUpload(containerId, data)){
+                // upload container
+                Map<String,Object> result = metaContentUtils.uploadContainer(igId, containerId, data);
+                response.put("status", "success");
+                response.put("item", result);
+            }else {
+                response.put("status", "error");
+                response.put("message", "Not allowed to upload. : Time over");
+            }
 
-            response.put("status", "success");
-            response.put("item", result);
         }catch (Exception e){
             response.put("status", "error");
             response.put("message", e.getMessage());

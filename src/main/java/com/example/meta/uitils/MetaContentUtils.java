@@ -34,7 +34,7 @@ public class MetaContentUtils {
         }
     }
 
-    public Map<String, Object> postSingleContent(String pageId, Map<String, Object> data) {
+    public Map<String, Object> postSingleContent(String igId, Map<String, Object> data) {
         try {
             String postType = (String) data.get("postType");
             String url =  (String) data.get("url");
@@ -84,7 +84,7 @@ public class MetaContentUtils {
             }
 
 
-            String uri = pageId +"/media";
+            String uri = igId +"/media";
             Map<String, Object> result = metaFeignClient.callPost(uri ,postData);
 
             return result;
@@ -94,7 +94,62 @@ public class MetaContentUtils {
         }
     }
 
-    public Map<String, Object> uploadContainer(String pageId, Map<String, Object> data) {
-        return null;
+    public Map<String, Object> uploadContainer(String igId, String containerId, Map<String, Object> data) {
+
+        Map<String,Object> response = new HashMap<>();
+        try {
+            Map<String, Object> uploadData = new HashMap<>();
+            uploadData.put("creation_id",containerId);
+            uploadData.put("access_token", data.get("access_token"));
+
+            String uri = igId +"/media_publish";
+            Map<String, Object> result = metaFeignClient.callPost(uri ,uploadData);
+            return result;
+//            String apiUrl = configuration.getGraphUrlPrefix() + "/"+ node.getStringValue("instagramId") + "/media_publish";
+//            ApiUtils.callApiMethod(apiUrl, null, uploadData, 5000, 10000, HttpMethod.POST, null);
+//            logger.info("게시물 업로드 성공");
+        }catch (Exception e){
+            throw new RuntimeException(e);
+        }
+    }
+
+    private String checkContainerStatus(String containerId, Map<String, Object> data){
+        String apiUrl = configuration.getGraphUrlPrefix() + "/"+ containerId;
+
+        Map<String, Object> containerData = new HashMap<>();
+        containerData.put("fields","status_code");
+
+        containerData.put("access_token", data.get("access_token"));
+
+        String uri = containerId;
+        Map<String, Object> result = metaFeignClient.callGet(uri ,containerData);
+        return (String) result.get("status_code");
+    }
+
+    public boolean isAvailableToUpload(String containerId, Map<String, Object> data){
+        int retry = 0;
+        int max_retry = 10;
+        for(int i = 0; i <= max_retry+1; i++){
+            String status = checkContainerStatus(containerId,data);
+            if(status.equals("FINISHED")){
+                return true;
+            }else if(status.equals("IN_PROGRESS")){
+                if(max_retry >= retry){
+                    retry++;
+                    System.out.println(retry); // count try
+                    try {
+                        Thread.sleep(1000);
+                    }catch (InterruptedException e){
+                        throw new RuntimeException(e);
+                    }
+                }else{
+                    break;
+                }
+            }else {
+                throw new RuntimeException("Not allowed to upload. :"  + status);
+
+            }
+        }
+        return false;
     }
 }
