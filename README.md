@@ -5,14 +5,14 @@
 - Introduction
 - Features
 - Usage Instructions
-- Implemented Methods
+- List of Instagram Graph API
 
 ## Introduction
  This repository is a collection of scripts and documentation demonstrating how to interact with Meta's Graph API. It includes some method implementations and examples for educational and archival purposes. It is not intended for production use or as a comprehensive library.
 
 ## Features   
  1. Usage instructions   
- 2. Examples of Instagram Graph API usage
+ 2. `List of Instagram Graph API`
 - Authentication
 - Posting (Feed, Reels, Story)
 - Message
@@ -45,4 +45,31 @@
 5. Get Instagram Profile Information   
    Finally, you are in the last step to use Instagram Graph API. Most API calls require `instagramId`.   
    For more details, please refer to the method `getProfile` in [MetaAccountUtils.java]((src/main/java/com/example/meta/uitils/MetaAccountUtils.java)).
-## Examples of Instagram Graph API usage
+## List of Instagram Graph API
+### Authentication
+**1. Get Long-Term Token**
+**[URL]**  
+```GET https://graph.facebook.com/v18.0/oauth/access_token```   
+
+**[Parameters]**
+
+|        Name         |   Type   |  Required  |   Default Value   |    Description    |
+|:-------------------:|:--------:|:----------:|:-----------------:|:-----------------:|
+|     grant_type      |  String  |    true    | fb_exchange_token |   Grant Type    |
+|      client_id      |  String  |    true    |        NA         |     App ID      |
+|    client_secret    |  String  |    true    |        NA         | App Secret Code |
+|  fb_exchange_token  |  String  |    true    |        NA         |  Valid Token  |
+
+**[Response]**
+```json
+{
+  "access_token": "EAAQVImp9AbwBO6324ladadfrttXj84oz6dVZA2ZBxgvVZCgRh4XtgkqcITV",
+  "token_type": "bearer"
+}
+```
+
+**2. Get Page**
+
+**3. Get Instagram Profile**
+### Posting (Feed, Reels, Story)
+### Message
