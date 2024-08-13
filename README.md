@@ -133,5 +133,26 @@
 ```
 
 **3. Get Instagram Profile**
+**[URL]**  
+```GET https://graph.facebook.com/v18.0/{{fbPageId}}```
+
+**[Parameters]**
+
+|     Name     |   Type   |  Required  |   Default Value   |          Description           |
+|:------------:|:--------:|:----------:|:-----------------:|:------------------------------:|
+|   fields     |  String  |    true    |        NA         | fields of data to be returned  |
+| access_token |  String  |    true    |        NA         |          Valid Token           |
+
+**[Response]**
+```json
+{
+  "instagram_business_account": {
+    "id": "123456788"
+  },
+  "name": "johnny.dev",
+  "category": "software",
+  "id": "12346567"
+}
+```
 ### Posting (Feed, Reels, Story)
 ### Message
