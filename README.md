@@ -132,16 +132,17 @@
 }
 ```
 
-**3. Get Instagram Profile**
+**3. Get Instagram ID**
 **[URL]**  
 ```GET https://graph.facebook.com/v18.0/{{fbPageId}}```
 
 **[Parameters]**
 
-|     Name     |   Type   |  Required  |   Default Value   |          Description           |
-|:------------:|:--------:|:----------:|:-----------------:|:------------------------------:|
-|   fields     |  String  |    true    |        NA         | fields of data to be returned  |
-| access_token |  String  |    true    |        NA         |          Valid Token           |
+|     Name     |  Type   |  Required  |   Default Value   |          Description          |
+|:------------:|:-------:|:----------:|:-----------------:|:-----------------------------:|
+|  fbPageId    | Integer |    true    |        NA         |       facebook page id        |
+|    fields    | String  |    true    |        NA         | fields of data to be returned |
+| access_token | String  |    true    |        NA         |          Valid Token          |
 
 **[Response]**
 ```json
@@ -154,5 +155,124 @@
   "id": "12346567"
 }
 ```
+
+**4. Get Instagram Profile**
+**[URL]**  
+```GET https://graph.facebook.com/v18.0/{{igId}}```
+**[Parameters]**
+
+|     Name     |  Type   |  Required  |   Default Value   |          Description          |
+|:------------:|:-------:|:----------:|:-----------------:|:-----------------------------:|
+|     igId     | Integer |    true    |        NA         |         instagram id          |
+|    fields    | String  |    true    |        NA         | fields of data to be returned |
+| access_token | String  |    true    |        NA         |          Valid Token          |
+
+**[Response]**
+```json
+{
+  "username": "dev.johnny",
+  "business_discovery": {
+    "username": "dev.johnny",
+    "media_count": 29,
+    "followers_count": 2200,
+    "follows_count": 0,
+    "id": "17841463105660648"
+  },
+  "profile_picture_url": "https://scontent-ssn1-1.xx.fbcdn.net/v/asdf.2885-15/adsf.jpg?_nc_cat=asfd&ccb=1-7&_nc_sid=7d201b&_nc_ohc=UDQAiReC04IQ7kNvgFkc8Ut&_nc_ht=scontent-ssn1-1.xx&edm=AL-3X8kEAAAA&oh=00_AYCMiuB1oaeFRECOzyVaum2kYRXpZ_3fGLPrXdKEgZSJ6A&oe=66C1D507",
+  "id": "12345678"
+}
+```
 ### Posting (Feed, Reels, Story)
+**1. get Media**
+**[URL]**  
+```GET https://graph.facebook.com/v18.0/{{igId}}/media```
+**[Parameters]**
+
+|     Name     |  Type   | Required |   Default Value   |          Description           |
+|:------------:|:-------:|:--------:|:-----------------:|:------------------------------:|
+|     igId     | Integer |    true  |        NA         |       instagram id             |
+|    fields    | String  |   true   |        NA         | fields of data to be returned  |
+| access_token | String  |   true   |        NA         |          Valid Token           |
+|    limit     | Integer |   true   |        NA         | number of media to be returned |
+|    before    | String  |  false   |        NA         |         previous page          |
+|    after     | String  |  false   |        NA         |           next page            |
+
+**[Response]**
+```json
+{
+  "data": [
+    {
+      "id": "1234",
+      "media_type": "VIDEO",
+      "media_url": "https://scontent-ssn1-1.cdninstagram.com/o1/v/t16/f1/m86/asdfasdf.mp4?ef6&_nc_sid=1d576d",
+      "permalink": "https://www.instagram.com/reel/C-adfasdf/",
+      "media_product_type": "REELS"
+    },
+    {
+      "id": "2135",
+      "media_type": "IMAGE",
+      "media_url": "https://scontent-ssn1-1.cdninstagram.com/v/t39.30808-6/414429164_17850794973103523_6141870855178044110_n.wN-g&oe=66C1C539",
+      "permalink": "https://www.instagram.com/p/C1Y2T55yQZb/",
+      "media_product_type": "FEED"
+    },
+    {
+      "id": "12321",
+      "media_type": "CAROUSEL_ALBUM",
+      "media_url": "https://scontent-ssn1-1.cdninstagram.com/v/t39.30808-6/401ninstag",
+      "media_product_type": "FEED"
+    }
+  ],
+  "paging": {
+    "cursors": {
+      "before": "QVaASDFeoFIUlhSRVJYSHBtdGtqTl9ZAZAWasdfasfda2RQYWw0XzlGeGlB",
+      "after": "QVFIUnpFZAASDFeoasdEgfasoeJcXNIdUhEaHlWSW9ZAdmVqQThhbVRqRnpEcHM5bDBR"
+    }
+  }
+}
+```
+**2. get Album(Children) Media**
+**[URL]**  
+```GET https://graph.facebook.com/v18.0/{{mediaId}}/chidren```
+**[Parameters]**
+
+|     Name     |  Type   | Required |   Default Value   |          Description          |
+|:------------:|:-------:|:--------:|:-----------------:|:-----------------------------:|
+|   mediaId    | Integer |   true   |        NA         |        media album id         |
+|    fields    | String  |   true   |        NA         | fields of data to be returned |
+| access_token | String  |   true   |        NA         |          Valid Token          |
+
+
+**[Response]**
+```json
+{
+  "data": [
+    {
+      "id": "1234",
+      "media_type": "VIDEO",
+      "media_url": "https://scontent-ssn1-1.cdninstagram.com/o1/v/t16/f1/m86/asdfasdf.mp4?ef6&_nc_sid=1d576d",
+      "permalink": "https://www.instagram.com/reel/C-adfasdf/",
+      "media_product_type": "REELS"
+    },
+    {
+      "id": "2135",
+      "media_type": "IMAGE",
+      "media_url": "https://scontent-ssn1-1.cdninstagram.com/v/t39.30808-6/414429164_17850794973103523_6141870855178044110_n.wN-g&oe=66C1C539",
+      "permalink": "https://www.instagram.com/p/C1Y2T55yQZb/",
+      "media_product_type": "FEED"
+    },
+    {
+      "id": "12321",
+      "media_type": "CAROUSEL_ALBUM",
+      "media_url": "https://scontent-ssn1-1.cdninstagram.com/v/t39.30808-6/401ninstag",
+      "media_product_type": "FEED"
+    }
+  ],
+  "paging": {
+    "cursors": {
+      "before": "QVaASDFeoFIUlhSRVJYSHBtdGtqTl9ZAZAWasdfasfda2RQYWw0XzlGeGlB",
+      "after": "QVFIUnpFZAASDFeoasdEgfasoeJcXNIdUhEaHlWSW9ZAdmVqQThhbVRqRnpEcHM5bDBR"
+    }
+  }
+}
+```
 ### Message
