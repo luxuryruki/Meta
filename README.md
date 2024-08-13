@@ -53,12 +53,12 @@
 
 **[Parameters]**
 
-|        Name         |   Type   |  Required  |   Default Value   |    Description    |
-|:-------------------:|:--------:|:----------:|:-----------------:|:-----------------:|
+|        Name         |   Type   |  Required  |   Default Value   |   Description   |
+|:-------------------:|:--------:|:----------:|:-----------------:|:---------------:|
 |     grant_type      |  String  |    true    | fb_exchange_token |   Grant Type    |
 |      client_id      |  String  |    true    |        NA         |     App ID      |
 |    client_secret    |  String  |    true    |        NA         | App Secret Code |
-|  fb_exchange_token  |  String  |    true    |        NA         |  Valid Token  |
+|  fb_exchange_token  |  String  |    true    |        NA         |   Valid Token   |
 
 **[Response]**
 ```json
@@ -69,6 +69,68 @@
 ```
 
 **2. Get Page**
+**[URL]**  
+```GET https://graph.facebook.com/v18.0/me/accounts```   
+
+**[Parameters]**
+
+|     Name     |   Type   |  Required  |   Default Value   |   Description    |
+|:------------:|:--------:|:----------:|:-----------------:|:----------------:|
+| access_token |  String  |    true    |        NA         |   Valid Token    |
+
+**[Response]**
+```json
+{
+  "data": [
+    {
+      "access_token": "EA4MWaJLaIOTmf8ISDAquv7i3tq46tZBReqBDV4hAZC7a08sfRvQLDjdywhgaj5PxqJAvkAQVImp9AbwBO4lkfdCxxiajgLmRmzX0ntQW2oFdTZBuK0PKHuYiG89UQKtHZBkZAaAj5FyzD7ylCbvVEb2f8bBhbjvJJspMEBZBjJRfaD8N5wm",
+      "category": "software",
+      "category_list": [
+        {
+          "id": "2211",
+          "name": "소프트웨어"
+        }
+      ],
+      "name": "dev.johnny",
+      "id": "12353267",
+      "tasks": [
+        "ADVERTISE",
+        "ANALYZE",
+        "CREATE_CONTENT",
+        "MESSAGING",
+        "MODERATE",
+        "MANAGE"
+      ]
+    },
+    {
+      "access_token": "EA4MWaJLaIOTmf8ISDAquv7i3tq46tZBReqBDV4hAZC7a08sfRvQLDjdywhgaj5PxqJAvkAQVImp9AbwBO4lkfdCxxiajgLmRmzX0ntQW2oFdTZBuK0PKHuYiG89UQKtHZBkZAaAj5FyzD7ylCbvVEb2f8bBhbjvJJspMEBZBjJRfaD8N5wm",
+      "category": "internet marketing service",
+      "category_list": [
+        {
+          "id": "123567",
+          "name": "internet marketing service"
+        }
+      ],
+      "name": "test",
+      "id": "123456",
+      "tasks": [
+        "ADVERTISE",
+        "ANALYZE",
+        "CREATE_CONTENT",
+        "MESSAGING",
+        "MODERATE",
+        "MANAGE"
+      ]
+    }
+  ],
+  "paging": {
+    "cursors": {
+      "before": "QVFIUkRpRTFaN25qT1dzYnpDMVZAHSEtWSk1wYjE5a2NlZA2p4YmVjCUU1BhVWDNPbHJ3S3dmbjdsSzE0ekZAISFlHTWZ1blJRNEhjZAXBrMl82ZA2VPT3dB",
+      "after": "QcFlRSEzYnpDMVZAHSEtWSk1wYjE5a2NlZA2p4YmVjzYnpDMVZAHSEtWSk1wYjE5a2NlZA2p4YmVjs5MVNPd2NPWDFWlFhSjBxVTNXOE1R"
+    }
+  }
+}
+```
 
 **3. Get Instagram Profile**
 ### Posting (Feed, Reels, Story)
