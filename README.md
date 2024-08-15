@@ -12,7 +12,7 @@
 
 ## Features   
  1. Usage instructions   
- 2. `List of Instagram Graph API`
+ 2. List of Instagram Graph API
 - Authentication
 - Posting (Feed, Reels, Story)
 - Message
@@ -45,6 +45,7 @@
 5. Get Instagram Profile Information   
    Finally, you are in the last step to use Instagram Graph API. Most API calls require `instagramId`.   
    For more details, please refer to the method `getProfile` in [MetaAccountUtils.java]((src/main/java/com/example/meta/uitils/MetaAccountUtils.java)).
+
 ## List of Instagram Graph API
 ### Authentication
 **1. Get Long-Term Token**
@@ -182,7 +183,7 @@
   "id": "12345678"
 }
 ```
-### Posting (Feed, Reels, Story)
+### Contents (Feed, Reels, Story)
 **1. get Media**
 **[URL]**  
 ```GET https://graph.facebook.com/v18.0/{{igId}}/media```
@@ -275,4 +276,143 @@
   }
 }
 ```
-### Message
+
+**3. posting**   
+**post single content**    
+3-1-1 create single container    
+**[URL]**  
+```GET https://graph.facebook.com/v18.0/{{igId}}/media```
+**[Parameters]**
+
+|     Name     |  Type   | Required |   Default Value   |    Description    |
+|:------------:|:-------:|:--------:|:-----------------:|:-----------------:|
+|     igId     | Integer |   true   |        NA         |   instagram id    |
+| access_token | String  |   true   |        NA         |    Valid Token    |
+|  media_type  | String  |   true   |        NA         | should be 'IMAGE' |
+|  image_url   | String  |   true   |        NA         |     image url     |
+|  user_tags   | String  |   true   |        NA         |     user tage     |
+|   caption    | String  |   true   |        NA         |      caption      |
+
+**[Request]**
+```
+{
+    "access_token": "asdf32523sadfSAdfienG3oiqwpoeifnlksfa",
+    "media_type": "IMAGE",
+    "image_url": "https://www.image.com/image1.jpg",
+    "caption": "sigle content upload",
+    "user_tags": [
+        {
+            "username":"johnny",
+            "x" : 0.2,
+            "y" :0.7
+        }
+        {
+            "username":"johnny2",
+            "x" : 0.3,
+            "y" :0.7
+        }
+    ]
+}
+```
+
+**[Response]**
+```
+{
+    "id": "112388319"
+}
+```
+3-1-2 post single container   
+**[URL]**  
+```GET https://graph.facebook.com/v18.0/{{igId}}/media_publish```
+**[Parameters]**
+
+|     Name     |  Type   | Required |   Default Value   |     Description     |
+|:------------:|:-------:|:--------:|:-----------------:|:-------------------:|
+|     igId     | Integer |   true   |        NA         |    instagram id     |
+| access_token | String  |   true   |        NA         |     Valid Token     |
+| creation_id  | String  |   true   |        NA         | single container Id |
+
+**[Response]**
+```
+{
+    "id": "352388319"
+}
+```
+**post multiple content**   
+3-2-1 create single container   
+**[URL]**  
+```GET https://graph.facebook.com/v18.0/{{igId}}/media```
+**[Parameters]**
+
+|       Name       |  Type   | Required |   Default Value   |      Description       |
+|:----------------:|:-------:|:--------:|:-----------------:|:----------------------:|
+|       igId       | Integer |   true   |        NA         |      instagram id      |
+|   access_token   | String  |   true   |        NA         |      Valid Token       |
+|    media_type    | String  |   true   |        NA         |   'IMAGE' or 'VIDEO'   |
+|    image_url     | String  |   true   |        NA         |       image url        |
+|   video_url      | String  |   true   |        NA         |       video url        |
+| is_carousel_item | Boolean |  false   |        NA         | if it is album in feed |
+
+
+**[Response]**
+```
+{
+    "id": "112388319"
+}
+```
+3-2-2 create slide container   
+**[URL]**  
+```GET https://graph.facebook.com/v18.0/{{igId}}/media```
+**[Parameters]**
+
+|     Name     |  Type   | Required |   Default Value   |  Description   |
+|:------------:|:-------:|:--------:|:-----------------:|:--------------:|
+|     igId     | Integer |   true   |        NA         |  instagram id  |
+| access_token | String  |   true   |        NA         |  Valid Token   |
+|  media_type  | String  |   true   |        NA         |   'CAROUSEL'   |
+|   children   |  ARRAY  |   true   |        NA         | Container ids  |
+|   caption    | String  |   true   |        NA         |    caption     |
+**[Response]**
+```
+{
+    "id": "112388319"
+}
+```
+3-2-3 post slide container   
+**[URL]**  
+```GET https://graph.facebook.com/v18.0/{{igId}}/media_publish```
+**[Parameters]**
+
+|     Name     |  Type   | Required |   Default Value   |    Description     |
+|:------------:|:-------:|:--------:|:-----------------:|:------------------:|
+|     igId     | Integer |   true   |        NA         |    instagram id    |
+| access_token | String  |   true   |        NA         |    Valid Token     |
+| creation_id  | String  |   true   |        NA         | slide container Id |
+
+**[Response]**
+```
+{
+    "id": "352388319"
+}
+```
+
+4 check container status
+**[URL]**
+
+```GET https://graph.facebook.com/v18.0/{{instagramContainerId}}/media_publish```
+   
+**[Parameters]**
+
+|         Name         |  Type   | Required | Default Value |    Description    |
+|:--------------------:|:-------:|:--------:|:-------------:|:-----------------:|
+| instagramContainerId | Integer |   true   | container Id  |   instagram id    |
+|     access_token     | String  |   true   |      NA       |    Valid Token    |
+|        fields        | String  |   true   |      NA       | 'status_code,id'  |
+**[Response]**
+```
+{
+    "status_code": "FINISHED",
+    "id": "18032008459976315"
+}
+```
+
