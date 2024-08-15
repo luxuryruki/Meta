@@ -415,4 +415,156 @@
     "id": "18032008459976315"
 }
 ```
+### Message
+**1. get page access token**   
+**[URL]**  
+```GET https://graph.facebook.com/v18.0/{{fbPageId}}```
+**[Parameters]**
 
+|     Name     |  Type   | Required |   Default Value   |  Description   |
+|:------------:|:-------:|:--------:|:-----------------:|:--------------:|
+|   fbPageId   | Integer |   true   |        NA         |  facebook id   |
+| access_token | String  |   true   |        NA         |  Valid Token   |
+|    fields    | String  |   true   |        NA         | 'access_token' |
+
+**[Response]**
+```
+{
+    "access_token": "BreQV3319AbwBOy7tasdfsaReMKv9ZC36lZCXrasdfs1gXXaGogjk4cTLmZAZAZCtl8Qz15dsfgu2asdfpsKAt2",
+    "id": "123456789"
+}
+```
+
+
+**2. get conversations**   
+**[URL]**  
+```GET https://graph.facebook.com/v18.0/{{fbPageId}}/conversations```
+**[Parameters]**
+
+|     Name     |  Type   | Required |   Default Value   | Description |
+|:------------:|:-------:|:--------:|:-----------------:|:-----------:|
+|   fbPageId   | Integer |   true   |        NA         | facebook id |
+| access_token | String  |   true   |        NA         | Valid Token |
+|   platform   | String  |   true   |        NA         | 'instagram' |
+
+**[Response]**
+```
+{
+    "data": [
+        {
+            "id": "a1gsdfhgjy2ODQxNzEaGacvGTwefgJhiUaDc0NzU5KDIg26dVAASD",
+            "updated_time": "2024-01-31T00:51:30+0000"
+        }
+    ]
+}
+```
+**3. get messages in conversation**
+**[URL]**  
+```GET https://graph.facebook.com/v18.0/{{chatRoomId}}```
+**[Parameters]**
+
+|     Name     |  Type   | Required |   Default Value   |   Description   |
+|:------------:|:-------:|:--------:|:-----------------:|:---------------:|
+|  chatRoomId  | Integer |   true   |        NA         | conversation id |
+| access_token | String  |   true   |        NA         |   Valid Token   |
+|   fields     | String  |   true   |        NA         |   'messages'    |
+
+**[Response]**
+```
+{
+    "messages": {
+        "data": [
+            {
+                "id": "aWcxMTI0NDI1OTQ3NDc1OTU0ODUwOTAQ3NDc1OzMyNDU2ODY5MDY4OAZDZDDk2OTQwMTQyMDY3NjcxODg3NDQ4MjE4MDA5NgZDMw",
+                "created_time": "2024-01-31T00:51:30+0000"
+            },
+            {
+                "id": "a2Njg0M1NzozMTQ2MTc4MMTI0NDI1OTTcxMDMwMD4NjQ0NDMxNxOklHTWVOjE3ODQxNDYzMTAjQ4OjM0MDI4MjMMZD1ZD",
+                "created_time": "2024-01-18T02:56:03+0000",
+                "is_unsupported": true
+            },
+            {
+                "id": "aWdfZAG1M2MjQ5NTgxNTkNjYwNfaXRlbToTU0ODUwOTA1NzozMTQ4MjlEcxMZDjI0NDI1OTQOjQ4OjM0MDI4MjMMZDDg3NDQ4M",
+                "created_time": "2024-01-17T09:53:06+0000",
+                "is_unsupported": true
+            },
+            {
+                "id": "ag0MTzc2FnZAUI0NDI1OTQ3NDc1OTU0ODUwOTAQ3NDc1OzMyNDU2ODY5MDY4OAZDZDDk2OTQwMTQyMDY3NjcxODg3NDQ4Mj",
+                "created_time": "2024-01-17T09:37:52+0000",
+                "is_unsupported": true
+            }
+        ],
+        "paging": {
+            "cursors": {
+                "after": "Z2FnZAUI0NDI1OTQ3NDc1OTU0ODUwOTAQ3NDc1OzMyNDU2ODY5MDY4OAZDZDDk2OTAD"
+            },
+            "next": "https://graph.facebook.com/v18.0/aWdfZ2FnZAUI0NDI1OTQ3NDc1OTU0ODUA5MDU3/messages?access_token=EA2FnZAUI0NDI1OTQ3NDc1OTU0ODUwOTAQ3NDc1OzMyNDU2ODY5MDY4OAZDZDDk2OTD"
+        }
+    },
+    "id": "aW2FnZAUI0NDI1OTQ3NDc1OTU0ODUwOTAQ3NDc1OzMyNDU2ODY5MDY4OAZDZDDk2OTTA5MDU3"
+}
+```
+
+
+**4. get message detail with id**
+**[URL]**  
+```GET https://graph.facebook.com/v18.0/{{chatMessageId}}```
+
+**[Parameters]**
+
+|     Name      |  Type   | Required |   Default Value   |            Description            |
+|:-------------:|:-------:|:--------:|:-----------------:|:---------------------------------:|
+| chatMessageId | Integer |   true   |        NA         |         chatMessageId id          |
+| access_token  | String  |   true   |        NA         |            Valid Token            |
+|    fields     | String  |   true   |        NA         | 'id,created_time,from,to,message' |
+
+**[Response]**
+```
+{
+    "id": "aasdfY123489bs;asjkfbaskasD",
+    "created_time": "2024-01-31T00:51:30+0000",
+    "from": {
+        "username": "johnnyddd",
+        "id": "12356890-0"
+    },
+    "to": {
+        "data": [
+            {
+                "username": "dev.flyer",
+                "id": "12345789"
+            }
+        ]
+    },
+    "message": "test message"
+}
+```
+
+**5. send message**
+**[URL]**  
+```GET https://graph.facebook.com/v18.0/me/messages```
+
+**[Parameters]**
+
+|     Name      |  Type   | Required |   Default Value   |            Description            |
+|:-------------:|:-------:|:--------:|:-----------------:|:---------------------------------:|
+| access_token  | String  |   true   |        NA         |            Valid Token            |
+
+**[Body]**
+```
+{
+    "recipient": {
+        "id": 123455 //user id
+    },
+    "message":{
+        "text":"test" // message
+    }
+}
+```
+
+**[Response]**
+```
+{
+    "recipient_id": "123455",
+    "message_id": "aWdfZAG1faXE5MzUzNgfasdfi2Asdfoo2mZDZD"
+}
+```
