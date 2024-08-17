@@ -14,14 +14,11 @@ import java.util.Map;
 public interface MetaFeignClient {
 
     @GetMapping("/{uri}")
-    Map<String, Object> callGetWithBody(@PathVariable("uri") String uri, @RequestBody Map<String, Object> data);
-
-    @GetMapping("/{uri}")
-    Map<String, Object> callGetWithParam(@PathVariable("uri") String uri, @RequestParam("access_token") String accessToken);
-
-    @GetMapping("/{uri}")
     Map<String, Object> callGet(@PathVariable("uri") String uri,  @SpringQueryMap Map<String, Object> data);
 
     @PostMapping("/{uri}")
     Map<String, Object> callPost(@PathVariable("uri") String uri,  @SpringQueryMap Map<String, Object> data);
+
+    @PostMapping("/{uri}")
+    Map<String, Object> callPostWithBody(@PathVariable("uri") String uri,  @RequestBody Map<String, Object> data);
 }

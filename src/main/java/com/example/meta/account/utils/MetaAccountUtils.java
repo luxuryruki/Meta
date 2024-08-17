@@ -27,7 +27,7 @@ public class MetaAccountUtils {
             data.put("client_secret", configuration.getClientSecret());
             data.put("fb_exchange_token", token);
 
-            Map<String, Object> response = metaFeignClient.callGetWithBody("oauth/access_token", data);
+            Map<String, Object> response = metaFeignClient.callGet("oauth/access_token", data);
             String longTermToken = (String)response.get("access_token");
             return longTermToken;
 //            List<Map<String,Object>> dataList = (List<Map<String,Object>>) resultMap.get("data");
@@ -40,8 +40,9 @@ public class MetaAccountUtils {
     //Get Facebook page info
     public Map<String, Object> getPage(String token) {
         try {
-
-            Map<String, Object> response = metaFeignClient.callGetWithParam("me/accounts", token);
+            Map<String, Object> data = new HashMap<>();
+            data.put("access_token", token);
+            Map<String, Object> response = metaFeignClient.callGet("me/accounts", data);
             List<Map<String,Object>> dataList = (List<Map<String,Object>>)response.get("data");
             return dataList.get(0);
 //            return result;
@@ -62,5 +63,13 @@ public class MetaAccountUtils {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public String getPageAccessToken(String pageId, String token){
+        Map<String, Object> data = new HashMap<>();
+        data.put("access_token", token);
+        data.put("fields", "access_token");
+        Map<String, Object> result = metaFeignClient.callGet(pageId ,data);
+        return (String) result.get("access_token");
     }
 }

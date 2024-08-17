@@ -14,7 +14,8 @@ public class MetaAccount {
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
     String name;
-    String token;
+    String token; // long term token
+    String pageToken; // page long term token
     String pageId;
     String instagramId;
 
@@ -28,6 +29,10 @@ public class MetaAccount {
 
     public void setPageId(String pageId) {
         this.pageId = pageId;
+    }
+
+    public void setPageToken(String pageToken) {
+        this.pageToken = pageToken;
     }
 
     public void setInstagramId(String instagramId) {
