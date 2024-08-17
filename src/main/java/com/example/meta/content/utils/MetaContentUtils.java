@@ -1,4 +1,4 @@
-package com.example.meta.uitils;
+package com.example.meta.content.utils;
 
 import com.example.meta.feign.MetaFeignClient;
 import com.example.meta.configuration.MetaConfiguration;

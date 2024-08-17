@@ -1,12 +1,11 @@
-package com.example.meta.controller;
+package com.example.meta.account.controller;
 
 
 import com.example.meta.configuration.MetaConfiguration;
 import com.example.meta.account.domain.MetaAccount;
 import com.example.meta.account.service.MetaAccountService;
-import com.example.meta.uitils.MetaAccountUtils;
+import com.example.meta.account.utils.MetaAccountUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Meta;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,7 +35,6 @@ public class AuthController {
 
     @PostMapping("/login")
     public void login(@RequestBody Map<String, Object> payload) {
-        // 여기서 사용자 정보를 처리합니다.
         String accessToken = (String) payload.get("accessToken");
         String token = metaAccountUtils.getLongTermToken(accessToken);
         Map<String, Object> page = metaAccountUtils.getPage(token);

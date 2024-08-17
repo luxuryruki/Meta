@@ -1,11 +1,11 @@
-package com.example.meta.controller;
+package com.example.meta.content.controller;
 
 import com.example.meta.account.domain.MetaAccount;
 import com.example.meta.account.service.MetaAccountService;
 import com.example.meta.configuration.MetaConfiguration;
 import com.example.meta.content.domain.ContainerRequest;
 import com.example.meta.content.domain.IgContainer;
-import com.example.meta.uitils.MetaContentUtils;
+import com.example.meta.content.utils.MetaContentUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
