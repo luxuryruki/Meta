@@ -1,5 +1,6 @@
 package com.example.meta.feign;
 
+import com.example.meta.message.domain.MessageRequest;
 import feign.QueryMap;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.cloud.openfeign.SpringQueryMap;
@@ -17,8 +18,11 @@ public interface MetaFeignClient {
     Map<String, Object> callGet(@PathVariable("uri") String uri,  @SpringQueryMap Map<String, Object> data);
 
     @PostMapping("/{uri}")
-    Map<String, Object> callPost(@PathVariable("uri") String uri,  @SpringQueryMap Map<String, Object> data);
+    Map<String, Object> callPostWithPrams(@PathVariable("uri") String uri,  @SpringQueryMap Map<String, Object> data);
 
     @PostMapping("/{uri}")
     Map<String, Object> callPostWithBody(@PathVariable("uri") String uri,  @RequestBody Map<String, Object> data);
+
+    @PostMapping("/{uri}")
+    Map<String, Object> callPostWitParamsAndBody(@PathVariable("uri") String uri, @SpringQueryMap Map<String, Object> params,  @RequestBody MessageRequest body);
 }
