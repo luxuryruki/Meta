@@ -1,4 +1,4 @@
-package com.example.meta.content.utils;
+package com.example.meta.content.service;
 
 import com.example.meta.feign.MetaFeignClient;
 import com.example.meta.configuration.MetaConfiguration;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import java.util.*;
 
 @Component
-public class MetaContentUtils {
+public class MetaContentService {
 
     @Autowired
     private MetaConfiguration configuration;
@@ -41,7 +41,7 @@ public class MetaContentUtils {
             }
 
             String uri = igId +"/media";
-            Map<String, Object> result = metaFeignClient.callPost(uri ,postData);
+            Map<String, Object> result = metaFeignClient.callPostWithPrams(uri ,postData);
 
             return result;
 
@@ -99,7 +99,7 @@ public class MetaContentUtils {
 
     public Map<String, Object> postSlideContainer(String igId, Map<String, Object> data) {
         String uri = igId +"/media";
-        Map<String, Object> result = metaFeignClient.callPost(uri ,data);
+        Map<String, Object> result = metaFeignClient.callPostWithPrams(uri ,data);
         return result;
     }
 
@@ -112,7 +112,7 @@ public class MetaContentUtils {
             uploadData.put("access_token", data.get("access_token"));
 
             String uri = igId +"/media_publish";
-            Map<String, Object> result = metaFeignClient.callPost(uri ,uploadData);
+            Map<String, Object> result = metaFeignClient.callPostWithPrams(uri ,uploadData);
             return result;
 //            String apiUrl = configuration.getGraphUrlPrefix() + "/"+ node.getStringValue("instagramId") + "/media_publish";
 //            ApiUtils.callApiMethod(apiUrl, null, uploadData, 5000, 10000, HttpMethod.POST, null);

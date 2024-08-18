@@ -5,7 +5,7 @@ import com.example.meta.account.service.MetaAccountService;
 import com.example.meta.configuration.MetaConfiguration;
 import com.example.meta.content.domain.ContainerRequest;
 import com.example.meta.content.domain.IgContainer;
-import com.example.meta.content.utils.MetaContentUtils;
+import com.example.meta.content.service.MetaContentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +18,7 @@ public class ContentController {
     private MetaConfiguration configuration;
 
     @Autowired
-    private MetaContentUtils metaContentUtils;
+    private MetaContentService metaContentService;
 
     @Autowired
     private MetaAccountService metaAccountService;
@@ -41,7 +41,7 @@ public class ContentController {
             data.put("access_token", token);
             data.put("limit", 20);
 
-            Map<String,Object> result = metaContentUtils.getMedia(igId,data);
+            Map<String,Object> result = metaContentService.getMedia(igId,data);
             response.put("status", "success");
             response.put("item", result);
         }catch (Exception e){
@@ -78,16 +78,16 @@ public class ContentController {
 
 
             // create container
-            Map<String,Object> container = metaContentUtils.postSingleContainer(igId,data);
+            Map<String,Object> container = metaContentService.postSingleContainer(igId,data);
             String containerId = (String) container.get("id");
 
             //Todo check container status logic
             /*
             * if container is not ready, you may get an error
             * */
-            if(metaContentUtils.isAvailableToUpload(containerId, data)){
+            if(metaContentService.isAvailableToUpload(containerId, data)){
                 // upload container
-                Map<String,Object> result = metaContentUtils.uploadContainer(igId, containerId, data);
+                Map<String,Object> result = metaContentService.uploadContainer(igId, containerId, data);
                 response.put("status", "success");
                 response.put("item", result);
             }else {
@@ -130,7 +130,7 @@ public class ContentController {
                 }else{
                     containerData.put("image_url", containerNode.getUrl());
                 }
-                Map<String,Object> container = metaContentUtils.postSingleContainer(igId,containerData);
+                Map<String,Object> container = metaContentService.postSingleContainer(igId,containerData);
                 String containerId = (String) container.get("id");
                 containerList.add(containerId);
 
@@ -138,7 +138,7 @@ public class ContentController {
             }
 
             //Todo status check
-            List<String> children = metaContentUtils.getAvailableContainer(containerList,token);
+            List<String> children = metaContentService.getAvailableContainer(containerList,token);
             Map<String,Object> slideData = new HashMap<>();
             slideData.put("access_token",token);
             slideData.put("media_type","CAROUSEL");
@@ -146,12 +146,12 @@ public class ContentController {
             slideData.put("caption",caption);
 
             //create slide container
-            Map<String,Object> container = metaContentUtils.postSlideContainer(igId,slideData);
+            Map<String,Object> container = metaContentService.postSlideContainer(igId,slideData);
             String containerId = (String) container.get("id");
 
-            if(metaContentUtils.isAvailableToUpload(containerId, slideData)){
+            if(metaContentService.isAvailableToUpload(containerId, slideData)){
                 //upload slide container
-                Map<String,Object> result = metaContentUtils.uploadContainer(igId, containerId, slideData);
+                Map<String,Object> result = metaContentService.uploadContainer(igId, containerId, slideData);
                 response.put("status", "success");
                 response.put("item", result);
             }else {

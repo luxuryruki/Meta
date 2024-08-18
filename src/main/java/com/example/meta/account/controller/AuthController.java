@@ -38,13 +38,14 @@ public class AuthController {
         String accessToken = (String) payload.get("accessToken");
         String token = metaAccountUtils.getLongTermToken(accessToken);
         Map<String, Object> page = metaAccountUtils.getPage(token);
+        String pageToken = metaAccountUtils.getPageAccessToken((String)page.get("id"),token);
         Map<String, Object> profile = metaAccountUtils.getProfile((String)page.get("id"),accessToken);
         Map<String, Object> igProfile = (Map<String, Object>) profile.get("instagram_business_account");
-
         MetaAccount metaAccount = new MetaAccount();
         metaAccount.setName((String)profile.get("name"));
         metaAccount.setInstagramId((String)igProfile.get("id"));
         metaAccount.setToken(token);
+        metaAccount.setPageToken(pageToken);
         metaAccount.setPageId((String)page.get("id"));
 
         MetaAccount savedAccount = metaAccountService.save(metaAccount);
