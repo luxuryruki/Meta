@@ -8,4 +8,9 @@ import lombok.Setter;
 public class Attachment {
     String type;
     Payload payload;
+
+    public Attachment(String type, Payload payload) {
+        this.type = type;
+        this.payload = payload;
+    }
 }

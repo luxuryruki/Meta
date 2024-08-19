@@ -12,4 +12,11 @@ public class Element {
     String subtitle;
     String image_url;
     List<Button> buttons;
+
+    public Element(String title, String subtitle, String image_url, List<Button> buttons) {
+        this.title = title;
+        this.subtitle = subtitle;
+        this.image_url = image_url;
+        this.buttons = buttons;
+    }
 }

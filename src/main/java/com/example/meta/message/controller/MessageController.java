@@ -136,4 +136,32 @@ public class MessageController {
         }
         return response;
     }
+
+    @PostMapping("/sendTemplateMessage")
+    public Map<String,Object> sendMessage(@RequestParam("id") Long id,@RequestParam("recipientId") Long recipientId) {
+        Map<String,Object> response = new HashMap<>();
+        try {
+            MetaAccount metaAccount =  metaAccountService.read(id).orElse(null);
+            if (metaAccount == null) {
+                response.put("status", "error");
+                response.put("message", "MetaAccount not found");
+                return response;
+            }
+
+            String token = metaAccount.getPageToken();
+            MessageRequest messageRequest = metaMessageService.getMessageRequest(recipientId, null);
+
+
+            Map<String,Object> prams = new HashMap<>();
+            prams.put("access_token",token);
+
+            Map<String,Object> result = metaMessageService.sendMessage(prams,messageRequest);
+            response.put("status", "success");
+            response.put("item", result);
+        }catch (Exception e){
+            response.put("status", "error");
+            response.put("message", e.getMessage());
+        }
+        return response;
+    }
 }

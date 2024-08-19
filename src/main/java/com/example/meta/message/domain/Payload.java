@@ -10,4 +10,9 @@ import java.util.List;
 public class Payload {
     String template_type;
     List<Element> elements;
+
+    public Payload(String template_type, List<Element> elements) {
+        this.template_type = template_type;
+        this.elements = elements;
+    }
 }
